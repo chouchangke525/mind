@@ -20,6 +20,6 @@
   Category.create word: "Other"
   
   Content.create user_id: User.find_by_name("yichen525").id
-  mind: I am so happy today.
-  title: The first mind.
+  mind: "I am so happy today."
+  title: "The first mind."
   category_id: Category.find_by_name("Other").id
