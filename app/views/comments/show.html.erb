@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<p>
+  <b>Mind Author:</b>
+  <%= Content.find(@comment.commentted_id).user.name %>
+</p>
+
+<p>
+  <b>Mind Title:</b>
+  <%= Content.find(@comment.commentted_id).title %>
+</p>
+
+<p>
+  <b>Mind:</b>
+</p>
+<p>
+  <textarea cols="120" rows="3" readonly="yes" style="resize: none;"><%= Content.find(@comment.commentted_id).mind %></textarea>
+</p>
+
+<p>
+  <b>Comment Author:</b>
+  <%= User.find(@comment.commenting_id).name %>
+</p>
+
+<p>
+  <b>Comment Word:</b>
+</p>
+<p>
+  <textarea cols="120" rows="3" readonly="yes" style="resize: none;"><%= @comment.comment_word %></textarea>
+
+</p>
+
+<% if session[:user_id]==@comment.commenting_id %>
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+
+<% end %>
+
+<p><%= link_to 'Show me this mind.', Content.find(@comment.commentted_id) %></p>
+<%= link_to 'Show me all the comments', comments_path %>

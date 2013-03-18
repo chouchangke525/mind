@@ -1,0 +1,98 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @content.title %>
+</p>
+
+<p>
+  <b>Mind:</b>
+</p>
+<p>
+  <textarea cols="120" rows="3" readonly="yes" style="resize: none;"><%= @content.mind %></textarea>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= Category.find(@content.category_id).word %>
+  
+</p>
+
+<p>
+  <b>Author:</b>
+  <%= User.find(@content.user_id).name %>
+</p>
+
+Comments:
+<% if @content.comments.count>0 %>
+
+<table border="1">
+  <tr>
+  
+    <th>Time</th>
+    <th>Name</th>
+   
+    <th>Comment</th>
+    
+    
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+
+<% @content.comments.each do |comment| %>
+  <tr>
+    <td><%= comment.created_at %></td>
+    <td><%= User.find(comment.commenting_id).name %></td>
+   
+    <td><%= comment.comment_word %></td>
+    
+    <% if session[:user_id]==comment.commenting_id %>
+    <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
+    <td><%= link_to 'Delete', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% else %>
+    <td> </td>
+    <td> </td>
+    <% end %>
+    
+  </tr>
+<% end %>
+</table>
+
+<% else %>
+<p>There is no comment yet~</p>
+<% end %>
+
+<% if session[:user_id] %>
+
+
+<%= form_for(@comment) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <% session[:interested_title]=@content.id %>
+  <div class="field">
+    <%= f.label :Add_a_comment %><br />
+    <%= f.text_area :comment_word %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<% end %>
+
+<% if session[:user_id]==@content.user_id %>
+<%= link_to 'Edit', edit_content_path(@content) %> |
+
+<% end %>
+
+<%= link_to 'Show me all the new minds', contents_path %>

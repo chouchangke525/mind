@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Following:</b>
+  <%= User.find(@follow.following_id).name %>
+</p>
+
+<p>
+  <b>Followed:</b>
+  <%= User.find(@follow.followed_id).name %>
+</p>
+
+
+<% if session[:admin_id] %>
+<%= link_to 'Show me all the follow relationships.', follows_path %>
+<% end  %>

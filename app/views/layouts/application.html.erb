@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mind</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% if session[:admin_id] %>
+<p><%= link_to 'All the users', users_path %> |
+<%= link_to 'All the administrators', admins_path %></p>
+
+<p><%= link_to 'All the contents', contents_path %> |
+<%= link_to 'All the comments', comments_path %> </p>
+
+<p><%= link_to 'All the follows', follows_path %> |
+
+<%= link_to 'All the categories', categories_path %></p>
+
+
+</p>
+
+<% end %>
+
+<% unless controller_name=="sessions"%>
+
+<% if session[:user_id] %>
+You are now signed in as an user. Welcome <%= User.find(session[:user_id]).name %>
+<p><%= link_to "Home Page", User.find(session[:user_id]) %> | 
+<%= link_to 'Write something new in your mind!', new_content_path %> |
+<%= link_to 'Explore the world', contents_path %> |
+
+<%= link_to 'Interesting comments', comments_path %> |
+
+<%= link_to 'Categories', categories_path %>
+</p> 
+
+
+
+
+<%= link_to 'Log Out', logout_path %>
+
+<% end %>
+
+<% if session[:admin_id] %>
+You are now signed in as an administrator. Welcome <%= Admin.find(session[:admin_id]).name %>
+<p><%= link_to "Home Page", Admin.find(session[:admin_id]) %></p>
+
+<%= link_to 'Log Out', logout_path %>
+
+<% end %>
+
+
+
+<% end %>
+<%= yield %>
+
+
+<hr>
+If you have any questions, please contact <a href="mailto:yichen525@uchicago.edu">Yichen Yu</a>.
+
+</body>
+</html>

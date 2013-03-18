@@ -1,0 +1,10 @@
+<h1>Editing comment</h1>
+
+
+<% if session[:user_id]==@comment.commenting_id %>
+
+<%= render 'form' %>
+
+<% end %>
+<%= link_to 'Show this comment.', @comment %> |
+<%= link_to 'Show me all the commments.', comments_path %>

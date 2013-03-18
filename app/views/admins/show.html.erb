@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @admin.name %>
+</p>
+<fieldset>
+<p><%= link_to 'All the users', users_path %> </p>
+<p><%= link_to 'All the administrators', admins_path %></p>
+
+<p><%= link_to 'All the contents', contents_path %> </p>
+<p><%= link_to 'All the comments', comments_path %> </p>
+
+<p><%= link_to 'All the follows', follows_path %> <p>
+
+<p><%= link_to 'All the categories', categories_path %></p>
+
+</fieldset>
+
+<% if session[:admin_id]==@admin.id %>
+
+<%= link_to 'Edit your profile.', edit_admin_path(@admin) %> |
+
+<% end %>
+<%= link_to 'Show me all the administrators.', admins_path %>

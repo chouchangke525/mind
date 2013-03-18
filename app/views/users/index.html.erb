@@ -1,0 +1,69 @@
+<h1>Listing users</h1>
+
+<table border="1">
+  <tr>
+    <th>Name</th>
+    
+    <th>Date of birth</th>
+    <th>Hobby</th>
+    <th>Occupation</th>
+    <th>Minds posted</th>
+    <th>Following No.</th>
+    <th>Followed No.</th>
+    <% if session[:user_id] %>
+       <th>Follow status</th>
+    <% end %>
+    
+    
+    <th></th>
+    <% if session[:admin_id] %>
+    <th></th>
+    <% end %>
+    
+  </tr>
+  
+  
+  
+<% if session[:user_id] %>
+<% @users=User.find(:all, :conditions => ["id != ?", session[:user_id]]) %>
+<% end %>
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    
+    <td><%= user.date_of_birth %></td>
+    <td><%= user.hobby %></td>
+    <td><%= user.occupation %></td>
+    <td><%= user.contents.count %></td>
+    <td><%= user.followeds.count %></td>
+    <td><%= user.followings.count %></td>
+    
+    
+    <% if session[:user_id] %>
+         <% status=false %>
+         <% User.find(session[:user_id]).followeds.each do |followed_person| %>
+         <% if followed_person==user %>
+         <%    status=true %>
+         <% end %>
+         <% end %>
+         <% if status  %>
+         <td> YES </td>
+         <% else %>
+         <td> NO </td>
+         <% end %>
+   
+    <% end %>
+    
+    
+    
+    
+    <td><%= link_to 'Show the detail', user %></td>
+    
+    <% if session[:admin_id] %>
+    <td><%= link_to 'Destroy this user', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />

@@ -1,0 +1,9 @@
+<h1>Editing category</h1>
+
+
+<% if session[:admin_id] %>
+<%= render 'form' %>
+<% end %>
+
+<%= link_to 'Show this category.', @category %> |
+<%= link_to 'Show me all the categories.', categories_path %>

@@ -1,0 +1,22 @@
+<h1>Listing follows</h1>
+
+<table border="1">
+  <tr>
+    <th>Following</th>
+    <th>Followed</th>
+    <th></th>
+
+  </tr>
+
+<% @follows.each do |follow| %>
+  <tr>
+    <td><%= User.find(follow.following_id).name%></td>
+    <td><%= User.find(follow.followed_id).name%></td>
+    <td><%= link_to 'Show', follow %></td>
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+

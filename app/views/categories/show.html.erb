@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Word:</b>
+  <%= @category.word %>
+</p>
+
+<% if @category.contents.count>0 %>
+<table border="1">
+  <tr>
+    <th>Time</th>
+    <th>Title</th>
+    <th width="800" height="50">Mind</th>
+    
+    <th>Author</th>
+    <th>Comments</th>
+    <th></th>
+    
+  </tr>
+
+<% @category.contents.each do |content| %>
+  <tr>
+    <td><%= content.updated_at %></td>
+    <td><%= content.title %></td>
+    <td width="800" height="50"><textarea cols="120" rows="3" readonly="yes" style="resize: none;"><%= content.mind %></textarea></td>
+    
+    <td><%= User.find(content.user_id).name %></td>
+    <td><%= content.comments.count %></td>
+    <td><%= link_to 'Show', content %></td>
+   
+  </tr>
+<% end %>
+</table>
+
+<% elsif session[:user_id] %>
+<p><%= link_to 'Start to write a new mind.', new_content_path %></p>
+
+<p><%= link_to 'Come back to the home page to edit your mind.', User.find(session[:user_id]) %></p>
+
+
+<% end %>
+
+<% if session[:admin_id] %>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<% end %>
+<%= link_to 'Show me all the categories.', categories_path %>

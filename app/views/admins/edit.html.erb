@@ -1,0 +1,9 @@
+<h1>Editing admin</h1>
+
+<% if session[:admin_id]==@admin.id %>
+
+<%= render 'form' %>
+
+<% end %>
+<%= link_to 'Come back to this administrator.', @admin %>
+<p><%= link_to 'Show me all the administrators.', admins_path %><p>

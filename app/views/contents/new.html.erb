@@ -1,0 +1,15 @@
+<h1>New Mind!</h1>
+
+<% if session[:user_id] %>
+
+
+<%= render 'form' %>
+
+<%= link_to 'Explore the great minds around the world.', contents_path %>
+
+<% else %>
+
+<p>I am sorry. You need to create a user account to write your mind. </p>
+
+<%= link_to 'Explore the great minds around the world.', contents_path %>
+<% end %>

@@ -1,0 +1,30 @@
+<h1>New minds published around the world. </h1>
+
+<table border="1">
+  <tr>
+    <th>Time</th>
+    <th>Title</th>
+    <th width="800" height="50">Mind</th>
+    <th>Category</th>
+    <th>Author</th>
+    <th>Comments</th>
+    <th></th>
+    
+  </tr>
+
+<% @contents.each do |content| %>
+  <tr>
+    <td><%= content.updated_at %></td>
+    <td><%= content.title %></td>
+    <td width="800" height="50"><textarea cols="120" rows="3" readonly="yes" style="resize: none;"><%= content.mind %></textarea></td>
+    <td><%= Category.find(content.category_id).word %></td>
+    <td><%= User.find(content.user_id).name %></td>
+    <td><%= content.comments.count %></td>
+    <td><%= link_to 'Show', content %></td>
+   
+  </tr>
+<% end %>
+</table>
+
+<br />
+

@@ -1,0 +1,10 @@
+<h1>Editing your mind!</h1>
+
+
+<% if session[:user_id]==@content.user_id %>
+<%= render 'form' %>
+
+<% end %>
+
+<%= link_to 'Show this mind.', @content %> |
+<%= link_to 'Explore the great minds around the world.', contents_path %>

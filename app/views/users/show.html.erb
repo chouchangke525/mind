@@ -1,0 +1,161 @@
+<p id="notice"><%= notice %></p>
+
+
+<fieldset>
+<legend> Basic Information :</legend>
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+
+<p>
+  <b>Date of birth:</b>
+  <%= @user.date_of_birth %>
+</p>
+
+<p>
+  <b>Hobby:</b>
+  <%= @user.hobby %>
+</p>
+
+<p>
+  <b>Occupation:</b>
+  <%= @user.occupation %>
+</p>
+
+
+ 
+
+<% if session[:user_id] %>
+  <% status=false %>
+  <% User.find(session[:user_id]).followeds.each do |followed_person| %>
+  <% if followed_person==User.find(@user.id) %>
+  <%    status=true %>
+  <% end %>
+  <% end %>
+<% end %>
+
+<% if session[:admin_id] %>
+<%= link_to 'Show all the users', users_path %>
+|
+<%= link_to 'Destroy this user', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% elsif session[:user_id]==@user.id %>
+<%= link_to 'Show all the other users', users_path %>
+|
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Destroy this account', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% elsif status==false %>
+<%= link_to 'Show all the other users', users_path %>
+
+<% session[:interested_id]=@user.id %>
+
+<%= button_to "Follow", :controller=> :follows, :action=> "create" %>
+
+<% else %>
+<%= link_to 'Show all the other users', users_path %>
+
+<p> You have followed this user. </p>
+
+<% end %>
+
+
+
+</fieldset>
+
+<fieldset>
+
+<legend> The great mind of this user:</legend>
+<table border="1">
+  <% if @user.contents.count>0 %>
+  <tr>
+    <th>Title</th>
+    <th width="800" height="50">Mind</th>
+    <th>Category</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  
+  <% end %>
+
+<% @user.contents.each do |content| %>
+  <tr>
+    <td><%= content.title %></td>
+    <td width="800" height="50"><textarea cols="120" rows="3" readonly="yes" style="resize: none;"><%= content.mind %></textarea></td>
+    <td><%= Category.find(content.category_id).word %></td>
+    <td><%= link_to 'Show', content %></td>
+    <td><%= link_to 'Edit', edit_content_path(content) %></td>
+    <td><%= link_to 'Destroy', content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+<%if session[:user_id] and session[:user_id]==@user.id %>
+<%= link_to 'Write something new in your mind!', new_content_path %>
+<% end %>
+</fieldset>
+
+
+<fieldset>
+
+<legend>I am following: </legend>
+
+
+<table border="1">
+ <% if @user.followeds.count>0 %>
+  <tr>
+ 
+    <th>Name</th>
+    <th>Date of birth</th>
+    <th>Hobby</th>
+    <th>Occupation</th>
+    <th></th>
+  </tr>
+  <% end %>
+
+<% @user.followeds.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    
+    <td><%= user.date_of_birth %></td>
+    <td><%= user.hobby %></td>
+    <td><%= user.occupation %></td>
+    <td><%= link_to 'Show the detail', user %></td>
+    
+  </tr>
+<% end %>
+</table>
+
+</fieldset>
+
+<fieldset>
+
+<legend>I was followed by: </legend>
+
+
+<table border="1">
+ <% if @user.followings.count>0 %>
+  <tr>
+ 
+    <th>Name</th>
+    <th>Date of birth</th>
+    <th>Hobby</th>
+    <th>Occupation</th>
+    <th></th>
+  </tr>
+  <% end %>
+
+<% @user.followings.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    
+    <td><%= user.date_of_birth %></td>
+    <td><%= user.hobby %></td>
+    <td><%= user.occupation %></td>
+    <td><%= link_to 'Show the detail', user %></td>
+    
+  </tr>
+<% end %>
+</table>
+
+</fieldset>

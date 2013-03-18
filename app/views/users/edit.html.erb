@@ -1,0 +1,20 @@
+<h1>Editing user</h1>
+<% if session[:admin_id] %>
+I am sorry. You cannot change the profile of your user.
+
+<% elsif session[:user_id]!=@user.id %>
+
+I am sorry. You cannot change the profile of other users.
+
+<% else %>
+<%= render 'form' %>
+
+<% end %>
+<p>
+<% if session[:user_id] %>
+<%= link_to 'Go Back to My Homepage', user_url(User.find(session[:user_id])) %> |
+<% else %>
+<%= link_to 'Go Back to My Homepage', admin_url(Admin.find(session[:admin_id])) %> |
+<% end %>
+<%= link_to 'Show all the users', users_path %>
+</p>

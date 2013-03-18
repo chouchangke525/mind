@@ -1,0 +1,40 @@
+
+<h1>Welcome to the world of MIND.</h1>
+<h3>Join us if you have great mind to share with your friend.</h3>
+
+
+<% if session[:admin_id] %>
+<%= link_to 'You need to sign out in order to sign in again', logout_path %>
+<p><%= link_to 'My Homepage', Admin.find(session[:admin_id]) %></p>
+
+<% elsif session[:user_id] %>
+<%= link_to 'You need to sign out in order to sign in again', logout_path %>
+<p><%= link_to 'My Homepage', User.find(session[:user_id]) %><p>
+
+<% else %>
+<div class="form">
+<% if flash[:notice] %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<%= form_tag do %>
+<fieldset>
+<legend>Please Log In</legend>
+<div>
+<label for="name">Name:</label>
+<%= text_field_tag :name, params[:name] %>
+</div>
+<div>
+<label for="password">Password:</label>
+<%= password_field_tag :password, params[:password] %>
+</div>
+<div>
+<%= submit_tag "Login" %>
+</div>
+</fieldset>
+<% end %>
+</div>
+
+<%= link_to 'Sign up as a new user', new_user_path %> 
+
+
+<% end %>
