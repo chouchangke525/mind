@@ -26,7 +26,7 @@ Mind::Application.routes.draw do
 
   resources :admins
 
-  root :to => 'sessions#login'
+  root :to => '/login'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
