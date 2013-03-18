@@ -18,7 +18,7 @@ user_name: "railstest417622686@gmail.com",
 password: "417622686",
 enable_starttls_auto: true
 }
-end
+
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
