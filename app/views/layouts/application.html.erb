@@ -29,6 +29,7 @@
 <% if session[:user_id] %>
 You are now signed in as an user. Welcome <%= User.find(session[:user_id]).name %>
 <p><%= link_to "Home Page", User.find(session[:user_id]) %> | 
+<%= link_to 'Show all the other users.', users_path %> |
 <%= link_to 'Write something new in your mind!', new_content_path %> |
 <%= link_to 'Explore the world', contents_path %> |
 

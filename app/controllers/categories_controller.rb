@@ -4,7 +4,8 @@ class CategoriesController < ApplicationController
   
   skip_before_filter :authorize_admin, only: [:new, :create,:index, :show]
   def index
-    @categories = Category.all
+  
+@categories=Category.all 
 
     respond_to do |format|
       format.html # index.html.erb

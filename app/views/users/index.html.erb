@@ -1,5 +1,24 @@
 <h1>Listing users</h1>
 
+
+
+<script>
+  function changeColors() {
+  var e = document.getElementsByTagName("tr");
+  for (var i=0; i < e.length; i+=3) {
+    e[i].style.color = "red";
+  }
+  for (var i=1; i < e.length; i+=3) {
+    e[i].style.color = "orange";
+  }
+  for (var i=2; i < e.length; i+=3) {
+    e[i].style.color = "blue";
+  }
+}
+</script>
+
+<h3 id="title" onclick="changeColors();"><b><u>Make this page colorful.</u></b></h3>
+
 <table border="1">
   <tr>
     <th>Name</th>
@@ -24,9 +43,7 @@
   
   
   
-<% if session[:user_id] %>
-<% @users=User.find(:all, :conditions => ["id != ?", session[:user_id]]) %>
-<% end %>
+
 <% @users.each do |user| %>
   <tr>
     <td><%= user.name %></td>
@@ -67,3 +84,5 @@
 </table>
 
 <br />
+<%=paginate @users %>
+

@@ -8,8 +8,18 @@ class UsersController < ApplicationController
  
   
   def index
-    @users = User.all
+ 
+    if session[:user_id] 
+       @users=User.where("id != ?", session[:user_id]).order("name asc") 
+    else
+       @users=User.order("name asc")
+    end 
+    
+     @users=@users.page(params[:page]).per(30)
+    
 
+ 
+ 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }

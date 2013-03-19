@@ -6,5 +6,10 @@ class Category < ActiveRecord::Base
   before_create do |category|
      category.word=category.word.capitalize
      end 
+
+  
+    
+  
+ 
   
 end
