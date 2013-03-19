@@ -9,6 +9,7 @@
     <th>Author</th>
     <th>Comments</th>
     <th></th>
+    <th></th>
     
   </tr>
 
@@ -17,11 +18,11 @@
     <td><%= content.updated_at %></td>
     <td><%= content.title %></td>
     <td width="800" height="50"><textarea cols="120" rows="3" readonly="yes" style="resize: none;"><%= content.mind %></textarea></td>
-    <td><%= Category.find(content.category_id).word %></td>
+    <td><%= content.category_id %></td>
     <td><%= User.find(content.user_id).name %></td>
     <td><%= content.comments.count %></td>
     <td><%= link_to 'Show', content %></td>
-   
+    <td><%= link_to 'Destroy', content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

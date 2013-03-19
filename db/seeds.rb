@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
+
   Admin.create name: "CHOUCHANGKE525",
       
       password: "chouchangke525",
